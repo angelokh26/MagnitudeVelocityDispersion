@@ -1,0 +1,15 @@
+## SQL query to produce the relevant data from SDSS: 
+## https://skyserver.sdss.org/dr12/en/tools/search/sql.aspx
+
+SELECT p.specObjID, p.ra, p.dec, p.z, p.zErr, s.velDisp, s.velDispErr
+FROM SpecPhotoAll AS p
+JOIN SpecObj AS s ON s.specObjID = p.specObjID
+WHERE
+p.ra BETWEEN 130 AND 230
+AND p.dec BETWEEN 0 AND 40
+AND p.zWarning=0
+AND p.class='GALAXY'
+AND p.subClass=' '
+AND p.survey='sdss'
+AND (p.petroMag_r-p.extinction_r) < 17.77
+AND p.programname='legacy
